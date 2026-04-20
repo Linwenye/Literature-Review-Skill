@@ -91,4 +91,4 @@ Both versions are functionally equivalent. Claude Code will use whichever is con
 
 ## Acknowledgements
 
-This skill is inspired by [khazix-skills](https://github.com/KKKKhazix/khazix-skills) -- an excellent collection of Claude Code skills for content creation and research. We built upon that foundation to create an **academic-focused variant** specifically tailored for systematic literature reviews, paper surveys, and related work analysis.
+This skill is inspired by [khazix-skills](https://github.com/KKKKhazix/khazix-skills) -- We built upon that foundation to create an **academic-focused variant** specifically tailored for systematic literature reviews, paper surveys, and related work analysis.

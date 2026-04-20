@@ -20,7 +20,7 @@ CSS_TEMPLATE = """
 
     @top-center {
         content: "HEADER_TEXT";
-        font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
+        font-family: "Heiti SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Droid Sans Fallback", Helvetica, Arial, sans-serif;
         font-size: 8pt;
         color: #95a5a6;
         border-bottom: 0.5pt solid #ecf0f1;
@@ -29,7 +29,7 @@ CSS_TEMPLATE = """
 
     @bottom-center {
         content: "第 " counter(page) " 页";
-        font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
+        font-family: "Heiti SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Droid Sans Fallback", Helvetica, Arial, sans-serif;
         font-size: 8pt;
         color: #95a5a6;
         border-top: 0.8pt solid #1a5276;
@@ -43,7 +43,7 @@ CSS_TEMPLATE = """
 }
 
 body {
-    font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
+    font-family: "Heiti SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Droid Sans Fallback", Helvetica, Arial, sans-serif;
     font-size: 10.5pt;
     line-height: 1.75;
     color: #2c3e50;
@@ -147,7 +147,7 @@ strong, b {
 
 /* 行内代码 */
 code {
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Menlo", "Courier New", Courier, "Heiti SC", "PingFang SC", "Hiragino Sans GB", monospace;
     background: #fdf2e9;
     color: #c0392b;
     padding: 0.5mm 1.5mm;
@@ -157,6 +157,7 @@ code {
 
 /* 代码块 */
 pre {
+    font-family: "Menlo", "Courier New", Courier, "Heiti SC", "PingFang SC", "Hiragino Sans GB", monospace;
     background: #f4f6f7;
     padding: 4mm;
     border-radius: 3pt;
@@ -166,6 +167,7 @@ pre {
     overflow-x: auto;
 }
 pre code {
+    font-family: inherit;
     background: none;
     color: #2c3e50;
     padding: 0;
