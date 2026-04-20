@@ -75,7 +75,7 @@ Keyword-based retrieval is only the starting point. Once an initial batch of rel
 
 1. **Round 1**: Keyword search and academic search produce a set of seed papers
 2. **Round 2**: Extract new papers from each seed paper's Related Work and references; simultaneously discover follow-up work via forward citation tracking
-3. **Round 3+**: Repeat the process on important papers newly discovered in Round 2, continuing until new discoveries plateau or are all duplicates (saturation reached)
+3. **Round 3**: Repeat the process on important papers newly discovered in Round 2. Be mindful of cost control
 
 **Stopping criteria**:
 - The majority of newly discovered papers are already in the collection (overlap rate > 80%)
