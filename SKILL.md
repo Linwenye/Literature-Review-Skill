@@ -59,6 +59,35 @@ description: |
 
 prompt要描述目标（"获取""调研""了解"），让子Agent自主判断最佳获取方式。
 
+### 滚雪球检索（Snowball Sampling）
+
+初始的关键词检索只是起点。找到一批相关论文后，必须通过**滚雪球法**扩展覆盖面：
+
+**前向滚雪球（Backward Snowballing）**：打开已找到的关键论文，阅读其 Related Work 部分和参考文献列表，从中挖掘出更多相关论文。尤其关注：
+- 该论文在 Related Work 中重点讨论/对比的工作
+- 参考文献中被多篇论文共同引用的经典工作
+- 被描述为 "closely related"、"most relevant"、"builds upon" 的论文
+
+**后向滚雪球（Forward Snowballing）**：通过 Semantic Scholar 的引用 API 查看谁引用了已找到的关键论文，发现后续的跟进工作和最新进展：
+> `curl -s "https://api.semanticscholar.org/graph/v1/paper/{paper_id}/citations?fields=title,authors,year,citationCount,venue&limit=50"`
+
+**迭代滚雪球流程**：
+
+1. **第一轮**：通过关键词检索和学术搜索获得一批种子论文（seed papers）
+2. **第二轮**：从种子论文的 Related Work 和参考文献中提取新论文，同时通过引用追踪发现后续工作
+3. **第三轮及以后**：对第二轮新发现的重要论文重复上述过程，直到新发现的论文不再增加或都已在已有列表中（达到饱和）
+
+**滚雪球停止条件**：
+- 新一轮发现的论文中，大多数已经在已有列表中（重复率 > 80%）
+- 已覆盖该领域的主要研究组和技术路线
+- 时间范围内的高引论文基本无遗漏
+
+**实操建议**：
+- 优先对高引论文和综述论文做滚雪球，它们的参考文献覆盖面最广
+- 用 WebFetch 访问论文的 arXiv 页面或 Semantic Scholar 页面获取 Related Work 内容
+- 维护一个去重的论文列表，避免重复处理
+- 每轮滚雪球都可以并行处理多篇论文，用子Agent加速
+
 ### 检索来源优先级
 
 | 来源 | 用途 |

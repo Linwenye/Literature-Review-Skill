@@ -59,6 +59,35 @@ Each sub-agent prompt must contain the following retrieval instructions:
 
 Frame prompts around goals ("retrieve", "investigate", "discover"), letting sub-agents choose the best approach autonomously.
 
+### Snowball Sampling (Citation Chaining)
+
+Keyword-based retrieval is only the starting point. Once an initial batch of relevant papers is found, you **must** expand coverage through snowball sampling:
+
+**Backward snowballing**: Open each key paper's Related Work section and reference list. Mine them for additional relevant papers. Pay special attention to:
+- Papers that the Related Work section discusses or compares against at length
+- References cited by multiple papers in your collection (classic/foundational works)
+- Papers described as "closely related", "most relevant", or "builds upon"
+
+**Forward snowballing**: Use Semantic Scholar's citation API to discover who cited your key papers -- this surfaces follow-up work and the latest developments:
+> `curl -s "https://api.semanticscholar.org/graph/v1/paper/{paper_id}/citations?fields=title,authors,year,citationCount,venue&limit=50"`
+
+**Iterative snowball workflow**:
+
+1. **Round 1**: Keyword search and academic search produce a set of seed papers
+2. **Round 2**: Extract new papers from each seed paper's Related Work and references; simultaneously discover follow-up work via forward citation tracking
+3. **Round 3+**: Repeat the process on important papers newly discovered in Round 2, continuing until new discoveries plateau or are all duplicates (saturation reached)
+
+**Stopping criteria**:
+- The majority of newly discovered papers are already in the collection (overlap rate > 80%)
+- All major research groups and technical approaches in the field are represented
+- High-citation papers within the target time range are accounted for
+
+**Practical tips**:
+- Prioritize snowballing from highly-cited papers and existing surveys -- their reference lists have the broadest coverage
+- Use WebFetch to access a paper's arXiv or Semantic Scholar page to extract Related Work content
+- Maintain a de-duplicated paper list to avoid redundant processing
+- Each snowball round can process multiple papers in parallel using sub-agents
+
 ### Retrieval Source Priority
 
 | Source | Purpose |
